@@ -34,7 +34,7 @@ namespace Hanami
  * @brief register configs
  */
 void
-registerConfigs()
+registerBasicConfigs()
 {
     REGISTER_BOOL_CONFIG("DEFAULT", "debug", false, false);
 }
