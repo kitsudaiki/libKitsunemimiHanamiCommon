@@ -30,5 +30,6 @@ INCLUDEPATH += $$PWD \
 
 HEADERS += \
     ../include/libKitsunemimiHanamiCommon/args.h \
-    ../include/libKitsunemimiHanamiCommon/config.h
+    ../include/libKitsunemimiHanamiCommon/config.h \
+    ../include/libKitsunemimiHanamiCommon/enums.h
 
