@@ -5,13 +5,18 @@
 #include <string>
 #include <uuid/uuid.h>
 
+namespace Kitsunemimi
+{
+namespace Hanami
+{
+
 struct kuuid
 {
     char uuid[UUID_STR_LEN];
     uint8_t padding[3];
 
     const std::string toString() const {
-        return std::string(uuid);
+        return std::string(uuid, UUID_STR_LEN);
     }
 
     // total size: 40 Bytes
@@ -32,6 +37,9 @@ generateUuid()
     uuid_unparse_lower(binaryUuid, result.uuid);
 
     return result;
+}
+
+}
 }
 
 #endif // UUID_H
