@@ -9,6 +9,7 @@ build:
     - echo Working on branch $CI_COMMIT_REF_NAME
     - pwd
     - apt-get update
+    - apt-get install -y uuid-dev
     - ./build.sh test
     - mkdir upload
     - cp -r ../result/* upload/

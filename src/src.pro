@@ -25,11 +25,17 @@ LIBS += -L../../libKitsunemimiCommon/src/debug -lKitsunemimiCommon
 LIBS += -L../../libKitsunemimiCommon/src/release -lKitsunemimiCommon
 INCLUDEPATH += ../../libKitsunemimiCommon/include
 
+LIBS += -luuid
+
 INCLUDEPATH += $$PWD \
                $$PWD/../include
 
 HEADERS += \
     ../include/libKitsunemimiHanamiCommon/args.h \
+    ../include/libKitsunemimiHanamiCommon/defines.h \
     ../include/libKitsunemimiHanamiCommon/config.h \
+    ../include/libKitsunemimiHanamiCommon/uuid.h \
     ../include/libKitsunemimiHanamiCommon/enums.h
+
+SOURCES +=
 
