@@ -30,7 +30,7 @@ namespace Kitsunemimi
 namespace Hanami
 {
 
-enum HttpType
+enum HttpRequestType
 {
     GET_TYPE = 0,
     POST_TYPE = 1,

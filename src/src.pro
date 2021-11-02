@@ -35,6 +35,7 @@ HEADERS += \
     ../include/libKitsunemimiHanamiCommon/defines.h \
     ../include/libKitsunemimiHanamiCommon/config.h \
     ../include/libKitsunemimiHanamiCommon/uuid.h \
+    ../include/libKitsunemimiHanamiCommon/structs.h \
     ../include/libKitsunemimiHanamiCommon/enums.h
 
 SOURCES +=
