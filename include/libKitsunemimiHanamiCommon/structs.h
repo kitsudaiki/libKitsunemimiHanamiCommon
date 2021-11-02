@@ -1,5 +1,5 @@
-#ifndef STRUCTS_H
-#define STRUCTS_H
+#ifndef KITSUNEMIMI_HANAMI_COMMON_STRUCTS_H
+#define KITSUNEMIMI_HANAMI_COMMON_STRUCTS_H
 
 #include <libKitsunemimiHanamiCommon/enums.h>
 #include <libKitsunemimiCommon/common_items/data_items.h>
@@ -9,13 +9,20 @@ namespace Kitsunemimi
 namespace Hanami
 {
 
-struct MessageResponse
+struct ResponseMessage
 {
-    HttpResponseTypes type = OK_RESPONE;
-    DataItem* respnseContent = nullptr;
+    HttpResponseTypes type = NO_CONTENT_RESPONE;
+    std::string respnseContent = "";
+};
+
+struct RequestMessage
+{
+    HttpRequestType httpType = GET_TYPE;
+    std::string id = "";
+    std::string inputValues = "{}";
 };
 
 }
 }
 
-#endif // STRUCTS_H
+#endif // KITSUNEMIMI_HANAMI_COMMON_STRUCTS_H
