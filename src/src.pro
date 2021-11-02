@@ -38,5 +38,6 @@ HEADERS += \
     ../include/libKitsunemimiHanamiCommon/structs.h \
     ../include/libKitsunemimiHanamiCommon/enums.h
 
-SOURCES +=
+SOURCES += \
+    config.cpp
 
