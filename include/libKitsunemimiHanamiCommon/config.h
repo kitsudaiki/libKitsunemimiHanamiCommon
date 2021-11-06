@@ -32,11 +32,8 @@ namespace Hanami
 {
 
 void registerBasicConfigs();
-void registerBasicConnectionConfigs(const std::vector<std::string> &configGroups);
-
-bool checkConfigs(const std::string &groupName);
-bool checkConfigs(const std::vector<std::string> &configGroups,
-                  const bool createServer);
+void registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
+                                    const bool createServer);
 
 }
 }
