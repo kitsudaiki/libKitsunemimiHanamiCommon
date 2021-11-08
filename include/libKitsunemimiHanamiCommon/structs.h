@@ -11,7 +11,7 @@ namespace Hanami
 
 struct ResponseMessage
 {
-    HttpResponseTypes type = NO_CONTENT_RESPONE;
+    HttpResponseTypes type = NO_CONTENT_RTYPE;
     std::string responseContent = "";
 };
 
