@@ -32,10 +32,12 @@ namespace Hanami
 
 enum HttpRequestType
 {
-    GET_TYPE = 0,
-    POST_TYPE = 1,
-    PUT_TYPE = 2,
-    DELETE_TYPE = 3
+    UNKNOWN_HTTP_TYPE = 0,
+    DELETE_TYPE = 1,
+    GET_TYPE = 2,
+    HEAD_TYPE = 3,
+    POST_TYPE = 4,
+    PUT_TYPE = 5,
 };
 
 enum HttpResponseTypes
