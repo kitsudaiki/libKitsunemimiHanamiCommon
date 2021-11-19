@@ -14,17 +14,19 @@ bool
 initMain(int argc,
          char *argv[],
          const std::string &name,
-         bool (*registerArguments)(Kitsunemimi::Args::ArgParser*),
-         void (*registerConfigs)())
+         bool (*registerArguments)(Kitsunemimi::Args::ArgParser*,
+                                   Kitsunemimi::ErrorContainer &),
+         void (*registerConfigs)(Kitsunemimi::ErrorContainer &),
+         Kitsunemimi::ErrorContainer &error)
 {
     Kitsunemimi::initConsoleLogger(true);
 
     // create and init argument-parser
     Kitsunemimi::Args::ArgParser argParser;
-    registerArguments(&argParser);
+    registerArguments(&argParser, error);
 
     // parse cli-input
-    if(argParser.parse(argc, argv) == false) {
+    if(argParser.parse(argc, argv, error) == false) {
         return false;
     }
 
@@ -33,10 +35,10 @@ initMain(int argc,
     if(configPath == "") {
         configPath = "/etc/" + name + "/" + name + ".conf";
     }
-    if(Kitsunemimi::Config::initConfig(configPath) == false) {
+    if(Kitsunemimi::Config::initConfig(configPath, error) == false) {
         return false;
     }
-    registerConfigs();
+    registerConfigs(error);
     if(Kitsunemimi::Config::isConfigValid() == false) {
         return false;
     }

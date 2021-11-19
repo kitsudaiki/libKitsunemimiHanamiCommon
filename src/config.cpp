@@ -8,10 +8,10 @@ namespace Hanami
 {
 
 void
-registerBasicConfigs()
+registerBasicConfigs(ErrorContainer &error)
 {
-    REGISTER_BOOL_CONFIG(   "DEFAULT", "debug",    false,      false);
-    REGISTER_STRING_CONFIG( "DEFAULT", "log_path", "/var/log", false);
+    REGISTER_BOOL_CONFIG(   "DEFAULT", "debug",    error, false,      false);
+    REGISTER_STRING_CONFIG( "DEFAULT", "log_path", error, "/var/log", false);
 }
 
 /**
@@ -19,19 +19,20 @@ registerBasicConfigs()
  */
 void
 registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
-                               const bool createServer)
+                               const bool createServer,
+                               ErrorContainer &error)
 {
     if(createServer)
     {
-        REGISTER_INT_CONFIG(    "DEFAULT", "port",      0,  false);
-        REGISTER_STRING_CONFIG( "DEFAULT", "address",   "", true);
-        REGISTER_STRING_CONFIG( "DEFAULT", "endpoints", "", true);
+        REGISTER_INT_CONFIG(    "DEFAULT", "port",      error, 0,  false);
+        REGISTER_STRING_CONFIG( "DEFAULT", "address",   error, "", true);
+        REGISTER_STRING_CONFIG( "DEFAULT", "endpoints", error, "", true);
     }
 
     for(const std::string& groupName : configGroups)
     {
-        REGISTER_INT_CONFIG(    groupName, "port",    0,  false);
-        REGISTER_STRING_CONFIG( groupName, "address", "", true);
+        REGISTER_INT_CONFIG(    groupName, "port",    error, 0,  false);
+        REGISTER_STRING_CONFIG( groupName, "address", error, "", true);
     }
 }
 

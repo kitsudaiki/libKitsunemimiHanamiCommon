@@ -38,17 +38,18 @@ namespace Hanami
  * @return true if successful, else false
  */
 bool
-registerArguments(Kitsunemimi::Args::ArgParser &argparser)
+registerArguments(Kitsunemimi::Args::ArgParser &argparser,
+                  Kitsunemimi::ErrorContainer &error)
 {
     std::string helpText = "";
 
     helpText = "absolute path to config-file";
-    if(argparser.registerString("config,c", helpText) == false) {
+    if(argparser.registerString("config,c", helpText, error) == false) {
         return false;
     }
 
     helpText = "enable debug-mode";
-    if(argparser.registerPlain("debug,d", helpText) == false) {
+    if(argparser.registerPlain("debug,d", helpText, error) == false) {
         return false;
     }
 

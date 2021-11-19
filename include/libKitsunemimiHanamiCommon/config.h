@@ -25,15 +25,17 @@
 
 #include <string>
 #include <vector>
+#include <libKitsunemimiCommon/logger.h>
 
 namespace Kitsunemimi
 {
 namespace Hanami
 {
 
-void registerBasicConfigs();
+void registerBasicConfigs(ErrorContainer &error);
 void registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
-                                    const bool createServer);
+                                    const bool createServer,
+                                    ErrorContainer &error);
 
 }
 }
