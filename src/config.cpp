@@ -59,7 +59,6 @@ registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
 
     for(const std::string& groupName : configGroups)
     {
-        REGISTER_BOOL_CONFIG(   groupName, "supported", error, false, false);
         REGISTER_INT_CONFIG(    groupName, "port",      error, 0,  false);
         REGISTER_STRING_CONFIG( groupName, "address",   error, "", false);
     }
