@@ -1,5 +1,5 @@
 /**
- * @file        internal_messages.h
+ * @file        enums.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,8 +20,8 @@
  *      limitations under the License.
  */
 
-#ifndef ENUMS_H
-#define ENUMS_H
+#ifndef KITSUNEMIMI_HANAMI_COMMON_ENUMS_H
+#define KITSUNEMIMI_HANAMI_COMMON_ENUMS_H
 
 #include <stdint.h>
 
@@ -125,4 +125,4 @@ enum SakuraObjectType
 }
 }
 
-#endif // ENUMS_H
+#endif // KITSUNEMIMI_HANAMI_COMMON_ENUMS_H

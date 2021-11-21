@@ -20,8 +20,8 @@
  *      limitations under the License.
  */
 
-#ifndef HANAMI_COMMON_ARGS_H
-#define HANAMI_COMMON_ARGS_H
+#ifndef KITSUNEMIMI_HANAMI_COMMON_ARGS_H
+#define KITSUNEMIMI_HANAMI_COMMON_ARGS_H
 
 #include <libKitsunemimiArgs/arg_parser.h>
 
@@ -59,4 +59,4 @@ registerArguments(Kitsunemimi::Args::ArgParser &argparser,
 }
 }
 
-#endif // HANAMI_COMMON_ARGS_H
+#endif // KITSUNEMIMI_HANAMI_COMMON_ARGS_H
