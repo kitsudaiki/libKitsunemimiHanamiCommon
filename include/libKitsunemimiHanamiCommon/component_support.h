@@ -1,5 +1,5 @@
 /**
- * @file        config.h
+ * @file        component_support.h
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,24 +20,44 @@
  *      limitations under the License.
  */
 
-#ifndef KITSUNEMIMI_HANAMI_COMMON_CONFIG_H
-#define KITSUNEMIMI_HANAMI_COMMON_CONFIG_H
+#ifndef KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H
+#define KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H
 
-#include <string>
-#include <vector>
-#include <libKitsunemimiCommon/logger.h>
+#include <libKitsunemimiConfig/config_handler.h>
 
 namespace Kitsunemimi
 {
 namespace Hanami
 {
 
-void registerBasicConfigs(ErrorContainer &error);
-void registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
-                                    const bool createServer,
-                                    ErrorContainer &error);
+enum Components
+{
+    Kyouko = 0,
+    Misaka = 1,
+    Azuki = 2,
+    Sagiri = 3,
+    Nagato = 4,
+    Izuna = 5
+};
+
+struct SupportedComponents
+{
+    bool support[6];
+
+    SupportedComponents()
+    {
+        support[0] = false;
+        support[1] = false;
+        support[2] = false;
+        support[3] = false;
+        support[4] = false;
+        support[5] = false;
+    }
+};
+
+static SupportedComponents supportedComponents = SupportedComponents();
 
 }
 }
 
-#endif // KITSUNEMIMI_HANAMI_COMMON_CONFIG_H
+#endif // KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H

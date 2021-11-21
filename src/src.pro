@@ -37,7 +37,8 @@ HEADERS += \
     ../include/libKitsunemimiHanamiCommon/uuid.h \
     ../include/libKitsunemimiHanamiCommon/structs.h \
     ../include/libKitsunemimiHanamiCommon/enums.h \
-    ../include/libKitsunemimiHanamiCommon/generic_main.h
+    ../include/libKitsunemimiHanamiCommon/generic_main.h \
+    ../include/libKitsunemimiHanamiCommon/component_support.h
 
 SOURCES += \
     config.cpp
