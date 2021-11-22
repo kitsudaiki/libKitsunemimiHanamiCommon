@@ -55,6 +55,7 @@ registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
         REGISTER_INT_CONFIG(    "DEFAULT", "port",      error, 0,  false);
         REGISTER_STRING_CONFIG( "DEFAULT", "address",   error, "", true);
         REGISTER_STRING_CONFIG( "DEFAULT", "endpoints", error, "", true);
+        REGISTER_STRING_CONFIG( "DEFAULT", "database",  error, "", true);
     }
 
     for(const std::string& groupName : configGroups)
