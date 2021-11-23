@@ -32,12 +32,12 @@ namespace Hanami
 
 enum Components
 {
-    Kyouko = 0,
-    Misaka = 1,
-    Azuki = 2,
-    Sagiri = 3,
-    Nagato = 4,
-    Izuna = 5
+    KYOUKO = 0,
+    MISAKA = 1,
+    AZUKI = 2,
+    SAGIRI = 3,
+    NAGATO = 4,
+    IZUNA = 5
 };
 
 struct SupportedComponents
