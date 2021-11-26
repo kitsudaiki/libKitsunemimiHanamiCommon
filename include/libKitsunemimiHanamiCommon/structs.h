@@ -45,7 +45,7 @@ struct RequestMessage
     std::string inputValues = "{}";
 };
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_STRUCTS_H

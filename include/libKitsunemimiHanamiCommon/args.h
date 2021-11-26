@@ -56,7 +56,7 @@ registerArguments(Kitsunemimi::Args::ArgParser &argparser,
     return true;
 }
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_ARGS_H

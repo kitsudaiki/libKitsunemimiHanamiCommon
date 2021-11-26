@@ -37,7 +37,7 @@ void registerBasicConnectionConfigs(const std::vector<std::string> &configGroups
                                     const bool createServer,
                                     ErrorContainer &error);
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_CONFIG_H

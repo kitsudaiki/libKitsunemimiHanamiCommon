@@ -122,7 +122,7 @@ enum SakuraObjectType
     BLOSSOM_TYPE = 1,
 };
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_ENUMS_H

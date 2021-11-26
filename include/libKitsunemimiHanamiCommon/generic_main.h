@@ -32,6 +32,18 @@ namespace Kitsunemimi
 namespace Hanami
 {
 
+/**
+ * @brief generic base-initializing for the main-function
+ *
+ * @param argc number of arguments
+ * @param argv list of cli-arguments
+ * @param name name of the componente to identify directory-path's
+ * @param registerArguments callback to init arguments
+ * @param registerConfigs callback to init configs
+ * @param error reference for error-output
+ *
+ * @return true, if successfully, else false
+ */
 bool
 initMain(int argc,
          char *argv[],
@@ -52,7 +64,7 @@ initMain(int argc,
         return false;
     }
 
-    // init config-file
+    // init and check config-file
     std::string configPath = argParser.getStringValue("config");
     if(configPath == "") {
         configPath = "/etc/" + name + "/" + name + ".conf";
@@ -84,7 +96,7 @@ initMain(int argc,
     return true;
 }
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_GENERIC_MAIN_H

@@ -57,7 +57,7 @@ struct SupportedComponents
 
 static SupportedComponents supportedComponents = SupportedComponents();
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H

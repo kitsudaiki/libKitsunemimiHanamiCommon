@@ -29,21 +29,25 @@ namespace Hanami
 {
 
 /**
- * @brief registerBasicConfigs
- * @param error
+ * @brief register basic configs for DEFAULT-seciont
+ *
+ * @param error reference for error-output
  */
 void
 registerBasicConfigs(ErrorContainer &error)
 {
     REGISTER_BOOL_CONFIG(   "DEFAULT", "debug",    error, false,      false);
     REGISTER_STRING_CONFIG( "DEFAULT", "log_path", error, "/var/log", false);
+    REGISTER_STRING_CONFIG( "DEFAULT", "database", error, "",         false);
 }
 
 /**
- * @brief registerBasicConnectionConfigs
- * @param configGroups
- * @param createServer
- * @param error
+ * @brief register configs to connect to other components
+ *
+ * @param configGroups list of components to initialize connection to these
+ * @param createServer true to spawn a server and not only client-connections
+ *
+ * @param error reference for error-output
  */
 void
 registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
@@ -55,7 +59,6 @@ registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
         REGISTER_INT_CONFIG(    "DEFAULT", "port",      error, 0,  false);
         REGISTER_STRING_CONFIG( "DEFAULT", "address",   error, "", true);
         REGISTER_STRING_CONFIG( "DEFAULT", "endpoints", error, "", true);
-        REGISTER_STRING_CONFIG( "DEFAULT", "database",  error, "", true);
     }
 
     for(const std::string& groupName : configGroups)

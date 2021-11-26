@@ -61,7 +61,7 @@ generateUuid()
     return result;
 }
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_UUID_H
