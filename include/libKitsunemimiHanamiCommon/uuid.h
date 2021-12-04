@@ -38,7 +38,7 @@ struct kuuid
     uint8_t padding[3];
 
     const std::string toString() const {
-        return std::string(uuid, UUID_STR_LEN);
+        return std::string(uuid, UUID_STR_LEN - 1);
     }
 
     // total size: 40 Bytes
