@@ -41,5 +41,6 @@ HEADERS += \
     ../include/libKitsunemimiHanamiCommon/component_support.h
 
 SOURCES += \
+    component_support.cpp \
     config.cpp
 

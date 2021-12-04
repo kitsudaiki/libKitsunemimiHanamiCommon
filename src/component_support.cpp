@@ -1,5 +1,5 @@
 /**
- * @file        component_support.h
+ * @file        component_support.cpp
  *
  * @author      Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
@@ -20,41 +20,33 @@
  *      limitations under the License.
  */
 
-#ifndef KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H
-#define KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H
-
-#include <libKitsunemimiConfig/config_handler.h>
+#include <libKitsunemimiHanamiCommon/component_support.h>
 
 namespace Kitsunemimi
 {
 namespace Hanami
 {
 
-enum Components
+Kitsunemimi::Hanami::SupportedComponents* SupportedComponents::m_supportedComponents = nullptr;
+
+SupportedComponents *SupportedComponents::getInstance()
 {
-    KYOUKO = 0,
-    MISAKA = 1,
-    AZUKI = 2,
-    SAGIRI = 3,
-    NAGATO = 4,
-    IZUNA = 5
-};
+    if(m_supportedComponents == nullptr) {
+        m_supportedComponents = new SupportedComponents();
+    }
 
-class SupportedComponents
+    return m_supportedComponents;
+}
+
+SupportedComponents::SupportedComponents()
 {
-public:
-    static SupportedComponents* getInstance();
-
-    bool support[6];
-    std::string localComponent = "";
-
-private:
-    static Kitsunemimi::Hanami::SupportedComponents* m_supportedComponents;
-
-    SupportedComponents();
-};
+    support[0] = false;
+    support[1] = false;
+    support[2] = false;
+    support[3] = false;
+    support[4] = false;
+    support[5] = false;
+}
 
 }  // namespace Hanami
 }  // namespace Kitsunemimi
-
-#endif // KITSUNEMIMI_HANAMI_COMMON_COMPONENT_SUPPORT_H
