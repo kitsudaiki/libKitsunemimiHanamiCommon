@@ -43,11 +43,13 @@ registerArguments(Kitsunemimi::Args::ArgParser &argparser,
 {
     std::string helpText = "";
 
+    // config-flag
     helpText = "absolute path to config-file";
     if(argparser.registerString("config,c", helpText, error) == false) {
         return false;
     }
 
+    // debug-flag
     helpText = "enable debug-mode";
     if(argparser.registerPlain("debug,d", helpText, error) == false) {
         return false;
