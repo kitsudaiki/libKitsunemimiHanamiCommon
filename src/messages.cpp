@@ -48,14 +48,17 @@ HanamiMessage::~HanamiMessage() {}
 void
 HanamiMessage::initBlob(DataBuffer &result, const uint64_t totalMsgSize)
 {
-    allocateBlocks_DataBuffer(result, calcBytesToBlocks(totalMsgSize));
-    result.usedBufferSize = totalMsgSize;
-    MessageHeader* header = static_cast<MessageHeader*>(result.data);
+    if(reset_DataBuffer(result, calcBytesToBlocks(totalMsgSize)))
+    {
+        result.usedBufferSize = totalMsgSize;
+        MessageHeader* header = static_cast<MessageHeader*>(result.data);
 
-    header->type = m_type;
-    header->messageSize = totalMsgSize;
+        header->type = m_type;
+        header->messageSize = totalMsgSize;
 
-    m_pos = sizeof(MessageHeader);
+        m_pos = sizeof(MessageHeader);
+    }
+    // TODO: handle else-case
 }
 
 /**
@@ -172,6 +175,11 @@ HanamiMessage::initRead(const void* data, const uint64_t dataSize)
     // check message size with given data-amount
     const MessageHeader* header = static_cast<const MessageHeader*>(data);
     if(header->messageSize != dataSize) {
+        return false;
+    }
+
+    // check type
+    if(header->type != m_type) {
         return false;
     }
 
