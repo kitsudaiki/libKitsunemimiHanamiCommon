@@ -68,5 +68,5 @@ registerBasicConnectionConfigs(const std::vector<std::string> &configGroups,
     }
 }
 
-}
-}
+}  // namespace Hanami
+}  // namespace Kitsunemimi

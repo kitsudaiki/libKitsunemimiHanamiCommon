@@ -62,9 +62,10 @@ HanamiMessage::initBlob(DataBuffer &result, const uint64_t totalMsgSize)
 }
 
 /**
- * @brief HanamiMessage::appendInt
- * @param result
- * @param val
+ * @brief append a uint64-value to the message
+ *
+ * @param result data-buffer, which holds the resulting bytes
+ * @param val value to convert
  */
 void
 HanamiMessage::appendUint(DataBuffer &result, const uint64_t &val)
@@ -132,10 +133,11 @@ HanamiMessage::appendData(DataBuffer &result,
 }
 
 /**
- * @brief HanamiMessage::appendFloatList
- * @param result
- * @param values
- * @param numberOfValues
+ * @brief append list of float-values to the message
+ *
+ * @param result data-buffer, which holds the resulting bytes
+ * @param values list of values to add
+ * @param numberOfValues number of values to add
  */
 void
 HanamiMessage::appendFloatList(DataBuffer &result, const
@@ -189,10 +191,12 @@ HanamiMessage::initRead(const void* data, const uint64_t dataSize)
 }
 
 /**
- * @brief HanamiMessage::readUint
- * @param data
- * @param output
- * @return
+ * @brief read uint64 from bytes
+ *
+ * @param data bytes to read
+ * @param output reference for the output-value
+ *
+ * @return false, if message is invalid, else true
  */
 bool
 HanamiMessage::readUint(const void* data, uint64_t &output)
@@ -277,11 +281,13 @@ HanamiMessage::readBinary(void* data,
 }
 
 /**
- * @brief HanamiMessage::readFloatList
- * @param data
- * @param resultData
- * @param numberOfValues
- * @return
+ * @brief read list of floats from bytes
+ *
+ * @param data bytes to read
+ * @param resultData pointer for resulting list
+ * @param numberOfValues reference for output of number of read values
+ *
+ * @return false, if message is invalid, else true
  */
 bool
 HanamiMessage::readFloatList(void* data,
