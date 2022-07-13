@@ -44,21 +44,18 @@ HanamiMessage::~HanamiMessage() {}
  *
  * @param result buffer for the resulting message
  * @param totalMsgSize total number of bytes for the complete message
+ *
+ * @return size of the header in bytes
  */
-void
-HanamiMessage::initBlob(DataBuffer &result, const uint64_t totalMsgSize)
+uint64_t
+HanamiMessage::initBlob(uint8_t* result, const uint64_t totalMsgSize)
 {
-    if(reset_DataBuffer(result, calcBytesToBlocks(totalMsgSize)))
-    {
-        result.usedBufferSize = totalMsgSize;
-        MessageHeader* header = static_cast<MessageHeader*>(result.data);
+    MessageHeader* header = reinterpret_cast<MessageHeader*>(result);
 
-        header->type = m_type;
-        header->messageSize = totalMsgSize;
+    header->type = m_type;
+    header->messageSize = totalMsgSize;
 
-        m_pos = sizeof(MessageHeader);
-    }
-    // TODO: handle else-case
+    return sizeof(MessageHeader);
 }
 
 /**
@@ -66,22 +63,25 @@ HanamiMessage::initBlob(DataBuffer &result, const uint64_t totalMsgSize)
  *
  * @param result data-buffer, which holds the resulting bytes
  * @param val value to convert
+ *
+ * @return size of the new entry in bytes
  */
-void
-HanamiMessage::appendUint(DataBuffer &result, const uint64_t &val)
+uint64_t
+HanamiMessage::appendUint(uint8_t* result, const uint64_t &val)
 {
-    uint8_t* u8Data = static_cast<uint8_t*>(result.data);
-
-    Entry* tempEntry = reinterpret_cast<Entry*>(&u8Data[m_pos]);
+    uint64_t pos = 0;
+    Entry* tempEntry = reinterpret_cast<Entry*>(&result[pos]);
     tempEntry->type = EntryType::UINT64_ENTRY_TYPE;
     tempEntry->valSize = sizeof(uint64_t);
-    m_pos += sizeof(Entry);
+    pos += sizeof(Entry);
 
     if(tempEntry->valSize > 0)
     {
-        memcpy(&u8Data[m_pos], &val, tempEntry->valSize);
-        m_pos += tempEntry->valSize;
+        memcpy(&result[pos], &val, tempEntry->valSize);
+        pos += tempEntry->valSize;
     }
+
+    return pos;
 }
 
 /**
@@ -89,22 +89,25 @@ HanamiMessage::appendUint(DataBuffer &result, const uint64_t &val)
  *
  * @param result data-buffer, which holds the resulting bytes
  * @param val string to convert
+ *
+ * @return size of the new entry in bytes
  */
-void
-HanamiMessage::appendString(DataBuffer &result, const std::string &val)
+uint64_t
+HanamiMessage::appendString(uint8_t* result, const std::string &val)
 {
-    uint8_t* u8Data = static_cast<uint8_t*>(result.data);
-
-    Entry* tempEntry = reinterpret_cast<Entry*>(&u8Data[m_pos]);
+    uint64_t pos = 0;
+    Entry* tempEntry = reinterpret_cast<Entry*>(&result[pos]);
     tempEntry->type = EntryType::STRING_ENTRY_TYPE;
     tempEntry->valSize = val.size();
-    m_pos += sizeof(Entry);
+    pos += sizeof(Entry);
 
     if(tempEntry->valSize > 0)
     {
-        memcpy(&u8Data[m_pos], val.c_str(), tempEntry->valSize);
-        m_pos += tempEntry->valSize;
+        memcpy(&result[pos], val.c_str(), tempEntry->valSize);
+        pos += tempEntry->valSize;
     }
+
+    return pos;
 }
 
 /**
@@ -112,24 +115,27 @@ HanamiMessage::appendString(DataBuffer &result, const std::string &val)
  *
  * @param result data-buffer, which holds the resulting bytes
  * @param val buffer with bytes to add
+ *
+ * @return size of the new entry in bytes
  */
-void
-HanamiMessage::appendData(DataBuffer &result,
+uint64_t
+HanamiMessage::appendData(uint8_t* result,
                           const void* data,
                           const uint64_t &dataSize)
 {
-    uint8_t* u8Data = static_cast<uint8_t*>(result.data);
-
-    Entry* tempEntry = reinterpret_cast<Entry*>(&u8Data[m_pos]);
+    uint64_t pos = 0;
+    Entry* tempEntry = reinterpret_cast<Entry*>(&result[pos]);
     tempEntry->type = EntryType::BYTE_ENTRY_TYPE;
     tempEntry->valSize = dataSize;
-    m_pos += sizeof(Entry);
+    pos += sizeof(Entry);
 
     if(tempEntry->valSize > 0)
     {
-        memcpy(&u8Data[m_pos], data, dataSize);
-        m_pos += tempEntry->valSize;
+        memcpy(&result[pos], data, dataSize);
+        pos += tempEntry->valSize;
     }
+
+    return pos;
 }
 
 /**
@@ -138,24 +144,27 @@ HanamiMessage::appendData(DataBuffer &result,
  * @param result data-buffer, which holds the resulting bytes
  * @param values list of values to add
  * @param numberOfValues number of values to add
+ *
+ * @return size of the new entry in bytes
  */
-void
-HanamiMessage::appendFloatList(DataBuffer &result, const
-                               float* values,
+uint64_t
+HanamiMessage::appendFloatList(uint8_t* result,
+                               const float* values,
                                const uint64_t &numberOfValues)
 {
-    uint8_t* u8Data = static_cast<uint8_t*>(result.data);
-
-    Entry* tempEntry = reinterpret_cast<Entry*>(&u8Data[m_pos]);
+    uint64_t pos = 0;
+    Entry* tempEntry = reinterpret_cast<Entry*>(&result[pos]);
     tempEntry->type = EntryType::FLOAT32_LIST_ENTRY_TYPE;
     tempEntry->valSize = numberOfValues;
-    m_pos += sizeof(Entry);
+    pos += sizeof(Entry);
 
     if(tempEntry->valSize > 0)
     {
-        memcpy(&u8Data[m_pos], values, numberOfValues * sizeof(float));
-        m_pos += tempEntry->valSize * sizeof(float);
+        memcpy(&result[pos], values, numberOfValues * sizeof(float));
+        pos += tempEntry->valSize * sizeof(float);
     }
+
+    return pos;
 }
 
 /**
@@ -204,12 +213,14 @@ HanamiMessage::readUint(const void* data, uint64_t &output)
     const uint8_t* u8Data = static_cast<const uint8_t*>(data);
     const Entry* tempEntry = nullptr;
 
+    // read header
     tempEntry = reinterpret_cast<const Entry*>(&u8Data[m_pos]);
     if(tempEntry->type != EntryType::UINT64_ENTRY_TYPE) {
         return false;
     }
     m_pos += sizeof(Entry);
 
+    // read payload
     if(tempEntry->valSize > 0)
     {
         output = *reinterpret_cast<const uint64_t*>(&u8Data[m_pos]);
@@ -233,12 +244,14 @@ HanamiMessage::readString(const void* data, std::string& output)
     const uint8_t* u8Data = static_cast<const uint8_t*>(data);
     const Entry* tempEntry = nullptr;
 
+    // read header
     tempEntry = reinterpret_cast<const Entry*>(&u8Data[m_pos]);
     if(tempEntry->type != EntryType::STRING_ENTRY_TYPE) {
         return false;
     }
     m_pos += sizeof(Entry);
 
+    // read payload
     if(tempEntry->valSize > 0)
     {
         output = std::string(reinterpret_cast<const char*>(&u8Data[m_pos]), tempEntry->valSize);
@@ -264,12 +277,14 @@ HanamiMessage::readBinary(void* data,
     uint8_t* u8Data = static_cast<uint8_t*>(data);
     const Entry* tempEntry = nullptr;
 
+    // read header
     tempEntry = reinterpret_cast<const Entry*>(&u8Data[m_pos]);
     if(tempEntry->type != EntryType::BYTE_ENTRY_TYPE) {
         return false;
     }
     m_pos += sizeof(Entry);
 
+    // read payload
     if(tempEntry->valSize > 0)
     {
         *resultData = reinterpret_cast<void*>(&u8Data[m_pos]);
@@ -297,12 +312,14 @@ HanamiMessage::readFloatList(void* data,
     uint8_t* u8Data = static_cast<uint8_t*>(data);
     const Entry* tempEntry = nullptr;
 
+    // read header
     tempEntry = reinterpret_cast<const Entry*>(&u8Data[m_pos]);
     if(tempEntry->type != EntryType::FLOAT32_LIST_ENTRY_TYPE) {
         return false;
     }
     m_pos += sizeof(Entry);
 
+    // read payload
     if(tempEntry->valSize > 0)
     {
         *resultData = reinterpret_cast<float*>(&u8Data[m_pos]);
@@ -366,9 +383,11 @@ ErrorLog_Message::read(void* data, const uint64_t dataSize)
  * @brief convert message content into binary to send
  *
  * @param result data-buffer for the resulting binary
+ *
+ * @return 0, if data are too big for the provided buffer, else number of used bytes
  */
-void
-ErrorLog_Message::createBlob(DataBuffer &result)
+uint64_t
+ErrorLog_Message::createBlob(uint8_t* result, const uint64_t bufferSize)
 {
     const uint64_t totalMsgSize = sizeof(MessageHeader)
                                   + 5 * sizeof(Entry)
@@ -378,12 +397,21 @@ ErrorLog_Message::createBlob(DataBuffer &result)
                                   + context.size()
                                   + values.size();
 
-    initBlob(result, totalMsgSize);
-    appendString(result, userUuid);
-    appendString(result, component);
-    appendString(result, errorMsg);
-    appendString(result, context);
-    appendString(result, values);
+    if(bufferSize < totalMsgSize) {
+        return 0;
+    }
+
+    uint64_t pos = 0;
+    pos += initBlob(&result[pos], totalMsgSize);
+    pos += appendString(&result[pos], userUuid);
+    pos += appendString(&result[pos], component);
+    pos += appendString(&result[pos], errorMsg);
+    pos += appendString(&result[pos], context);
+    pos += appendString(&result[pos], values);
+
+    assert(pos == totalMsgSize);
+
+    return pos;
 }
 
 //==================================================================================================

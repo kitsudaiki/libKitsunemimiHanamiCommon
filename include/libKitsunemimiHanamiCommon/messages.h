@@ -33,6 +33,8 @@ namespace Kitsunemimi
 namespace Hanami
 {
 
+//==================================================================================================
+
 class HanamiMessage
 {
 
@@ -58,8 +60,9 @@ public:
 
     struct MessageHeader
     {
+        const char protocolIdent[6] = {'h', 'a', 'n', 'a', 'm', 'i'};
         uint8_t type = 0;
-        uint8_t padding[7];
+        uint8_t padding[1];
         uint64_t messageSize = 0;
     }; // size: 16
 
@@ -67,17 +70,17 @@ public:
     virtual ~HanamiMessage();
 
     virtual bool read(void* data, const uint64_t dataSize) = 0;
-    virtual void createBlob(DataBuffer &result) = 0;
+    virtual uint64_t createBlob(uint8_t* result, const uint64_t bufferSize) = 0;
 
 protected:
-    uint64_t m_pos = 0;
     uint8_t m_type = 0;
+    uint64_t m_pos = 0;
 
-    void initBlob(DataBuffer &result, const uint64_t totalMsgSize);
-    void appendUint(DataBuffer &result, const uint64_t &val);
-    void appendString(DataBuffer &result, const std::string &val);
-    void appendData(DataBuffer &result, const void* data, const uint64_t &dataSize);
-    void appendFloatList(DataBuffer &result, const float* values, const uint64_t &numberOfValues);
+    uint64_t initBlob(uint8_t* result, const uint64_t totalMsgSize);
+    uint64_t appendUint(uint8_t* result, const uint64_t &val);
+    uint64_t appendString(uint8_t* result, const std::string &val);
+    uint64_t appendData(uint8_t* result, const void* data, const uint64_t &dataSize);
+    uint64_t appendFloatList(uint8_t* result, const float* values, const uint64_t &numberOfValues);
 
     bool initRead(const void* data, const uint64_t dataSize);
     bool readUint(const void* data, uint64_t& output);
@@ -85,6 +88,27 @@ protected:
     bool readBinary(void* data, void** resultData, uint64_t &resultDataSize);
     bool readFloatList(void* data, float** resultData, uint64_t &numberOfValues);
 };
+
+//==================================================================================================
+
+/**
+ * @brief check if the incoming bytes are a serializied hanami-message
+ *
+ * @param data data to check
+ * @param dataSize number of bytes of data
+ *
+ * @return true, if data are the beginning of a hanami-message
+ */
+inline bool
+isHanamiProtocol(void* data, const uint64_t dataSize)
+{
+    if(dataSize < sizeof(HanamiMessage::MessageHeader)) {
+        return false;
+    }
+
+    const uint64_t* start = static_cast<const uint64_t*>(data);
+    return ((*start) & 0xFFFFFFFFFFFF0000) == 0x68616e616d690000;
+}
 
 //==================================================================================================
 
@@ -102,7 +126,7 @@ public:
     std::string values = "";
 
     bool read(void* data, const uint64_t dataSize);
-    void createBlob(DataBuffer &result);
+    uint64_t createBlob(uint8_t* result, const uint64_t bufferSize);
 };
 
 //==================================================================================================
