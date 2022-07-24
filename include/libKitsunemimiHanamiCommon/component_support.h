@@ -33,11 +33,11 @@ namespace Hanami
 enum Components
 {
     KYOUKO = 0,
-    MISAKA = 1,
+    MISAKI = 1,
     AZUKI = 2,
     SAGIRI = 3,
-    NAGATO = 4,
-    IZUNA = 5
+    NOZOMI = 4,
+    INORI = 5
 };
 
 class SupportedComponents
