@@ -24,7 +24,7 @@
 #define KITSUNEMIMI_HANAMI_COMMON_STRUCTS_H
 
 #include <libKitsunemimiHanamiCommon/enums.h>
-#include <libKitsunemimiCommon/common_items/data_items.h>
+#include <libKitsunemimiCommon/items/data_items.h>
 
 namespace Kitsunemimi
 {
