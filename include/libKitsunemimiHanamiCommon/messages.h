@@ -48,7 +48,7 @@ public:
         BOOL_ENTRY_TYPE = 4,
         STRING_ENTRY_TYPE = 5,
         BYTE_ENTRY_TYPE = 6,
-        FLOAT32_LIST_ENTRY_TYPE = 7,
+        FLOAT32_LIST_ENTRY_TYPE = 7
     };
 
     struct Entry
@@ -60,7 +60,7 @@ public:
 
     struct MessageHeader
     {
-        const char protocolIdent[6] = {'h', 'a', 'n', 'a', 'm', 'i'};
+        char protocolIdent[6] = {'h', 'a', 'n', 'a', 'm', 'i'};
         uint8_t type = 0;
         uint8_t padding[1];
         uint64_t messageSize = 0;
@@ -78,12 +78,14 @@ protected:
 
     uint64_t initBlob(uint8_t* result, const uint64_t totalMsgSize);
     uint64_t appendUint(uint8_t* result, const uint64_t &val);
+    uint64_t appendBool(uint8_t* result, const bool &val);
     uint64_t appendString(uint8_t* result, const std::string &val);
     uint64_t appendData(uint8_t* result, const void* data, const uint64_t &dataSize);
     uint64_t appendFloatList(uint8_t* result, const float* values, const uint64_t &numberOfValues);
 
     bool initRead(const void* data, const uint64_t dataSize);
     bool readUint(const void* data, uint64_t& output);
+    bool readBool(const void* data, bool& output);
     bool readString(const void* data, std::string& output);
     bool readBinary(void* data, void** resultData, uint64_t &resultDataSize);
     bool readFloatList(void* data, float** resultData, uint64_t &numberOfValues);
@@ -100,14 +102,15 @@ protected:
  * @return true, if data are the beginning of a hanami-message
  */
 inline bool
-isHanamiProtocol(void* data, const uint64_t dataSize)
+isHanamiProtocol(const void* data, const uint64_t dataSize)
 {
     if(dataSize < sizeof(HanamiMessage::MessageHeader)) {
         return false;
     }
 
     const uint64_t* start = static_cast<const uint64_t*>(data);
-    return ((*start) & 0xFFFFFFFFFFFF0000) == 0x68616e616d690000;
+    // 0x0000696d616e6168 = "hanami"-protocol-identifier
+    return ((*start) & 0x0000FFFFFFFFFFFF) == 0x0000696d616e6168;
 }
 
 //==================================================================================================

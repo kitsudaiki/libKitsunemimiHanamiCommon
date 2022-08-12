@@ -51,6 +51,8 @@ uint64_t
 HanamiMessage::initBlob(uint8_t* result, const uint64_t totalMsgSize)
 {
     MessageHeader* header = reinterpret_cast<MessageHeader*>(result);
+    MessageHeader newHeader;
+    *header = newHeader;
 
     header->type = m_type;
     header->messageSize = totalMsgSize;
@@ -73,6 +75,32 @@ HanamiMessage::appendUint(uint8_t* result, const uint64_t &val)
     Entry* tempEntry = reinterpret_cast<Entry*>(&result[pos]);
     tempEntry->type = EntryType::UINT64_ENTRY_TYPE;
     tempEntry->valSize = sizeof(uint64_t);
+    pos += sizeof(Entry);
+
+    if(tempEntry->valSize > 0)
+    {
+        memcpy(&result[pos], &val, tempEntry->valSize);
+        pos += tempEntry->valSize;
+    }
+
+    return pos;
+}
+
+/**
+ * @brief append a bool-value to the message
+ *
+ * @param result data-buffer, which holds the resulting bytes
+ * @param val value to convert
+ *
+ * @return size of the new entry in bytes
+ */
+uint64_t
+HanamiMessage::appendBool(uint8_t* result, const bool &val)
+{
+    uint64_t pos = 0;
+    Entry* tempEntry = reinterpret_cast<Entry*>(&result[pos]);
+    tempEntry->type = EntryType::BOOL_ENTRY_TYPE;
+    tempEntry->valSize = sizeof(bool);
     pos += sizeof(Entry);
 
     if(tempEntry->valSize > 0)
@@ -224,6 +252,37 @@ HanamiMessage::readUint(const void* data, uint64_t &output)
     if(tempEntry->valSize > 0)
     {
         output = *reinterpret_cast<const uint64_t*>(&u8Data[m_pos]);
+        m_pos += tempEntry->valSize;
+    }
+
+    return true;
+}
+
+/**
+ * @brief read bool from bytes
+ *
+ * @param data bytes to read
+ * @param output reference for the output-value
+ *
+ * @return false, if message is invalid, else true
+ */
+bool
+HanamiMessage::readBool(const void* data, bool &output)
+{
+    const uint8_t* u8Data = static_cast<const uint8_t*>(data);
+    const Entry* tempEntry = nullptr;
+
+    // read header
+    tempEntry = reinterpret_cast<const Entry*>(&u8Data[m_pos]);
+    if(tempEntry->type != EntryType::BOOL_ENTRY_TYPE) {
+        return false;
+    }
+    m_pos += sizeof(Entry);
+
+    // read payload
+    if(tempEntry->valSize > 0)
+    {
+        output = *reinterpret_cast<const bool*>(&u8Data[m_pos]);
         m_pos += tempEntry->valSize;
     }
 
