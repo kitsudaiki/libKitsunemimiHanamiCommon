@@ -122,7 +122,7 @@ public:
     ErrorLog_Message();
     ~ErrorLog_Message();
 
-    std::string userUuid = "";
+    std::string userId = "";
     std::string component = "";
     std::string errorMsg = "";
     std::string context = "";
