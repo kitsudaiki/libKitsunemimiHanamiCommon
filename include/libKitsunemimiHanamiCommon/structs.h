@@ -45,6 +45,26 @@ struct RequestMessage
     std::string inputValues = "{}";
 };
 
+struct UserContext
+{
+    std::string userId = "";
+    std::string projectId = "";
+    bool isAdmin = false;
+    bool isProjectAdmin = false;
+    std::string token = "";
+
+    UserContext() {}
+
+    UserContext(const DataMap &inputContext)
+    {
+        userId = inputContext.getStringByKey("id");
+        projectId = inputContext.getStringByKey("project");
+        isAdmin = inputContext.getBoolByKey("is_admin");
+        isProjectAdmin = inputContext.getBoolByKey("is_project_admin");
+        token = inputContext.getStringByKey("token");
+    }
+};
+
 }  // namespace Hanami
 }  // namespace Kitsunemimi
 
