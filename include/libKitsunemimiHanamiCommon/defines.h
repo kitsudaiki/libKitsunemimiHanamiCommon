@@ -30,4 +30,10 @@
 #define UNINIT_STATE_16 0xFFFF
 #define UNINIT_STATE_8 0xFF
 
+// regex
+#define UUID_REGEX "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+#define ID_REGEX "[a-zA-Z][a-zA-Z_0-9]*"
+#define ID_EXT_REGEX "[a-zA-Z][a-zA-Z_0-9 @]*"
+#define NAME_REGEX "[a-zA-Z][a-zA-Z_0-9 ]*"
+
 #endif // KITSUNEMIMI_HANAMI_COMMON_DEFINES_H
