@@ -29,7 +29,8 @@ namespace Hanami
 
 Kitsunemimi::Hanami::SupportedComponents* SupportedComponents::m_supportedComponents = nullptr;
 
-SupportedComponents *SupportedComponents::getInstance()
+SupportedComponents*
+SupportedComponents::getInstance()
 {
     if(m_supportedComponents == nullptr) {
         m_supportedComponents = new SupportedComponents();
