@@ -35,5 +35,7 @@
 #define ID_REGEX "[a-zA-Z][a-zA-Z_0-9]*"
 #define ID_EXT_REGEX "[a-zA-Z][a-zA-Z_0-9 @]*"
 #define NAME_REGEX "[a-zA-Z][a-zA-Z_0-9 ]*"
+#define INT_VALUE_REGEX "^-?([0-9]+)$"
+#define FLOAT_VALUE_REGEX "^-?([0-9]+)\\.([0-9]+)$"
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_DEFINES_H
