@@ -35,7 +35,7 @@ enum Components
     KYOUKO = 0,
     MISAKI = 1,
     AZUKI = 2,
-    SAGIRI = 3,
+    SHIORI = 3,
     NOZOMI = 4,
     INORI = 5
 };
