@@ -58,7 +58,7 @@ struct UserContext
     UserContext(const DataMap &inputContext)
     {
         userId = inputContext.getStringByKey("id");
-        projectId = inputContext.getStringByKey("project");
+        projectId = inputContext.getStringByKey("project_id");
         isAdmin = inputContext.getBoolByKey("is_admin");
         isProjectAdmin = inputContext.getBoolByKey("is_project_admin");
         token = inputContext.getStringByKey("token");
