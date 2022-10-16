@@ -33,10 +33,10 @@ IMPORTANT: All my projects are only tested on Linux.
 
 Repository-Name | Version-Tag | Download-Path
 --- | --- | ---
-libKitsunemimiCommon | v0.26.0 | https://github.com/kitsudaiki/libKitsunemimiCommon.git
-libKitsunemimiIni | v0.5.1 | https://github.com/kitsudaiki/libKitsunemimiIni.git
-libKitsunemimiArgs | v0.4.0 | https://github.com/kitsudaiki/libKitsunemimiArgs.git
-libKitsunemimiConfig | v0.4.0 | https://github.com/kitsudaiki/libKitsunemimiConfig.git
+libKitsunemimiCommon | develop | https://github.com/kitsudaiki/libKitsunemimiCommon.git
+libKitsunemimiIni | develop | https://github.com/kitsudaiki/libKitsunemimiIni.git
+libKitsunemimiArgs | develop | https://github.com/kitsudaiki/libKitsunemimiArgs.git
+libKitsunemimiConfig | develop | https://github.com/kitsudaiki/libKitsunemimiConfig.git
 
 HINT: These Kitsunemimi-Libraries will be downloaded and build automatically with the build-script below.
 
