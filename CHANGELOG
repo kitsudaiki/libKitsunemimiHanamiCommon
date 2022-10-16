@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.3.0] - 2022-10-16
+
+### Added
+- regex-values for endpoints
+- function for time-serialization
+
+### Changed
+- renames userUuid to userId
+- update hanami-messages
+- component-renaming
+
+
 ## [0.2.0] - 2022-06-27
 
 ### Added

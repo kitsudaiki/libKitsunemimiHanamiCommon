@@ -3,7 +3,7 @@ QT -= qt core gui
 TARGET = KitsunemimiHanamiCommon
 TEMPLATE = lib
 CONFIG += c++17
-VERSION = 0.2.0
+VERSION = 0.3.0
 
 LIBS += -L../../libKitsunemimiArgs/src -lKitsunemimiArgs
 LIBS += -L../../libKitsunemimiArgs/src/debug -lKitsunemimiArgs

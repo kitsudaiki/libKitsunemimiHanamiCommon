@@ -33,10 +33,10 @@ IMPORTANT: All my projects are only tested on Linux.
 
 Repository-Name | Version-Tag | Download-Path
 --- | --- | ---
-libKitsunemimiCommon | develop | https://github.com/kitsudaiki/libKitsunemimiCommon.git
-libKitsunemimiIni | develop | https://github.com/kitsudaiki/libKitsunemimiIni.git
-libKitsunemimiArgs | develop | https://github.com/kitsudaiki/libKitsunemimiArgs.git
-libKitsunemimiConfig | develop | https://github.com/kitsudaiki/libKitsunemimiConfig.git
+libKitsunemimiCommon |  | https://github.com/kitsudaiki/libKitsunemimiCommon.git
+libKitsunemimiIni | v0.6.0 | https://github.com/kitsudaiki/libKitsunemimiIni.git
+libKitsunemimiArgs | v0.5.0 | https://github.com/kitsudaiki/libKitsunemimiArgs.git
+libKitsunemimiConfig | v0.5.0 | https://github.com/kitsudaiki/libKitsunemimiConfig.git
 
 HINT: These Kitsunemimi-Libraries will be downloaded and build automatically with the build-script below.
 
@@ -57,10 +57,6 @@ cd ../result
 It create automatic a `build` and `result` directory in the directory, where you have cloned the project. At first it build all into the `build`-directory and after all build-steps are finished, it copy the include directory from the cloned repository and the build library into the `result`-directory. So you have all in one single place.
 
 Tested on Debian and Ubuntu. If you use Centos, Arch, etc and the build-script fails on your machine, then please write me a mail and I will try to fix the script.
-
-## Usage
-
-(sorry, docu comes later)
 
 
 ## Contributing
