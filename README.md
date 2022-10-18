@@ -33,7 +33,7 @@ IMPORTANT: All my projects are only tested on Linux.
 
 Repository-Name | Version-Tag | Download-Path
 --- | --- | ---
-libKitsunemimiCommon |  | https://github.com/kitsudaiki/libKitsunemimiCommon.git
+libKitsunemimiCommon | v0.27.1 | https://github.com/kitsudaiki/libKitsunemimiCommon.git
 libKitsunemimiIni | v0.6.0 | https://github.com/kitsudaiki/libKitsunemimiIni.git
 libKitsunemimiArgs | v0.5.0 | https://github.com/kitsudaiki/libKitsunemimiArgs.git
 libKitsunemimiConfig | v0.5.0 | https://github.com/kitsudaiki/libKitsunemimiConfig.git
