@@ -34,7 +34,6 @@ HEADERS += \
     ../include/libKitsunemimiHanamiCommon/args.h \
     ../include/libKitsunemimiHanamiCommon/defines.h \
     ../include/libKitsunemimiHanamiCommon/config.h \
-    ../include/libKitsunemimiHanamiCommon/messages.h \
     ../include/libKitsunemimiHanamiCommon/uuid.h \
     ../include/libKitsunemimiHanamiCommon/structs.h \
     ../include/libKitsunemimiHanamiCommon/enums.h \
@@ -44,6 +43,5 @@ HEADERS += \
 
 SOURCES += \
     component_support.cpp \
-    config.cpp \
-    messages.cpp
+    config.cpp
 
