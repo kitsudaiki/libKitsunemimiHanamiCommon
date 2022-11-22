@@ -37,5 +37,6 @@
 #define NAME_REGEX "[a-zA-Z][a-zA-Z_0-9 ]*"
 #define INT_VALUE_REGEX "^-?([0-9]+)$"
 #define FLOAT_VALUE_REGEX "^-?([0-9]+)\\.([0-9]+)$"
+#define IPV4_REGEX "\\b((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\\.|$)){4}\\b"
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_DEFINES_H

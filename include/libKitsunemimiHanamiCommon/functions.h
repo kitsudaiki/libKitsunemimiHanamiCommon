@@ -29,6 +29,9 @@
 #include <ctime>
 #include <iostream>
 #include <iomanip>
+#include <regex>
+
+#include "defines.h"
 
 /**
  * @brief convert chrono-timestamp into a string in UTC time
@@ -40,13 +43,28 @@
  */
 inline const std::string
 serializeTimePoint(const std::chrono::high_resolution_clock::time_point &time,
-                   const std::string &format = "UTC: %Y-%m-%d %H:%M:%S")
+                   const std::string &format = "%Y-%m-%d %H:%M:%S")
 {
     std::time_t tt = std::chrono::system_clock::to_time_t(time);
     std::tm tm = *std::gmtime(&tt);
     std::stringstream ss;
     ss << std::put_time(&tm, format.c_str() );
     return ss.str();
+}
+
+
+/**
+ * @brief check if an id is an uuid
+ *
+ * @param id id to check
+ *
+ * @return true, if id is an uuid, else false
+ */
+inline bool
+isUuid(const std::string& id)
+{
+    const std::regex uuidRegex(UUID_REGEX);
+    return regex_match(id, uuidRegex);
 }
 
 #endif // KITSUNEMIMI_HANAMI_COMMON_FUNCTIONS_H
