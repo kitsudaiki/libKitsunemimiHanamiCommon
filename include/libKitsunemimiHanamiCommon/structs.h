@@ -65,6 +65,34 @@ struct UserContext
     }
 };
 
+struct Position
+{
+    uint32_t x = 0;
+    uint32_t y = 0;
+    uint32_t z = 0;
+
+    Position() {}
+
+    Position(const Position &other)
+    {
+        x = other.x;
+        y = other.y;
+        z = other.z;
+    }
+
+    Position& operator=(const Position &other)
+    {
+        if(this != &other)
+        {
+            x = other.x;
+            y = other.y;
+            z = other.z;
+        }
+
+        return *this;
+    }
+};
+
 }  // namespace Hanami
 }  // namespace Kitsunemimi
 
