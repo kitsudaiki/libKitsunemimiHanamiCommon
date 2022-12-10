@@ -24,6 +24,7 @@
 #define KITSUNEMIMI_HANAMI_COMMON_STRUCTS_H
 
 #include <libKitsunemimiHanamiCommon/enums.h>
+#include <libKitsunemimiHanamiCommon/defines.h>
 #include <libKitsunemimiCommon/items/data_items.h>
 
 namespace Kitsunemimi
@@ -67,9 +68,9 @@ struct UserContext
 
 struct Position
 {
-    uint32_t x = 0;
-    uint32_t y = 0;
-    uint32_t z = 0;
+    uint32_t x = UNINTI_POINT_32;
+    uint32_t y = UNINTI_POINT_32;
+    uint32_t z = UNINTI_POINT_32;
 
     Position() {}
 
@@ -90,6 +91,20 @@ struct Position
         }
 
         return *this;
+    }
+
+    bool operator==(const Position &other)
+    {
+        return(this->x == other.x
+               && this->y == other.y
+               && this->z == other.z);
+    }
+
+    bool isValid() const
+    {
+        return(x != UNINTI_POINT_32
+               && y != UNINTI_POINT_32
+               && z != UNINTI_POINT_32);
     }
 };
 
