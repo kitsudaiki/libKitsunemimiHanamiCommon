@@ -71,6 +71,7 @@ struct Position
     uint32_t x = UNINTI_POINT_32;
     uint32_t y = UNINTI_POINT_32;
     uint32_t z = UNINTI_POINT_32;
+    uint32_t w = UNINTI_POINT_32;
 
     Position() {}
 
