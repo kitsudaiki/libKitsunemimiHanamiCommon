@@ -109,6 +109,20 @@ struct Position
     }
 };
 
+struct EndpointEntry
+{
+    SakuraObjectType type = BLOSSOM_TYPE;
+    std::string group = "-";
+    std::string name = "";
+};
+
+
+struct BlossomStatus
+{
+    uint64_t statusCode = 0;
+    std::string errorMessage = "";
+};
+
 }  // namespace Hanami
 }  // namespace Kitsunemimi
 
