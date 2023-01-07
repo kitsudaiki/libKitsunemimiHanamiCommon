@@ -38,7 +38,7 @@ namespace Hanami
  * @return true if successful, else false
  */
 bool
-registerArguments(Kitsunemimi::Args::ArgParser &argparser,
+registerArguments(Kitsunemimi::ArgParser &argparser,
                   Kitsunemimi::ErrorContainer &error)
 {
     std::string helpText = "";
